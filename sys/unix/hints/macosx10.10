@@ -150,6 +150,7 @@ else # !WANT_QT_FROM_HOMEBREW
 CFLAGS += -F$(QT_FRAMEWORKS_DIR)
 WINLIB += -F$(QT_FRAMEWORKS_DIR) -framework QtCore -framework QtGui
 endif # !WANT_QT_FROM_HOMEBREW
+MOC = $(QTDIR)/bin/moc
 LINK=$(CXX)
 WINSRC += $(WINQT4SRC)
 WINOBJ0 += $(WINQT4OBJ) /usr/lib/libz.dylib
