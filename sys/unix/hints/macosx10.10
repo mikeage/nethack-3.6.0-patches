@@ -32,6 +32,14 @@ WANT_DEFAULT=curses
 #     library installation root.  (Qt2 or Qt3 will not work.)
 ifdef WANT_WIN_QT
 QTDIR=/usr
+#HAVE_QT5=1
+ifdef HAVE_QT5
+    QT_PACKAGES = Qt5Gui Qt5Widgets
+    QT_CORE = Qt5Core
+else
+    QT_PACKAGES = QtGui
+    QT_CORE = QtCore
+endif
 endif	# WANT_WIN_QT
 
 # 1c. Was SDL2 installed in /Library/Frameworks (default) or via Homebrew?
@@ -143,9 +151,9 @@ ifdef WANT_WIN_QT
 QT_FRAMEWORKS_DIR = /Library/Frameworks
 CFLAGS += -DQT_GRAPHICS -DNOUSER_SOUNDS -DZLIB_COMP -mmacosx-version-min=10.10
 ifdef WANT_QT_FROM_HOMEBREW
-CFLAGS += $(shell pkg-config --cflags QtCore QtGui)
-WINLIB += $(shell pkg-config --libs QtCore QtGui)
-QTDIR = $(shell pkg-config --variable=prefix QtCore)
+CFLAGS += $(shell pkg-config --cflags $(QT_CORE) $(QT_PACKAGES) )
+WINLIB += $(shell pkg-config --libs $(QT_CORE) $(QT_PACKAGES) )
+QTDIR = $(shell pkg-config --variable=prefix $(QT_CORE))
 else # !WANT_QT_FROM_HOMEBREW
 CFLAGS += -F$(QT_FRAMEWORKS_DIR)
 WINLIB += -F$(QT_FRAMEWORKS_DIR) -framework QtCore -framework QtGui
