@@ -32,7 +32,7 @@ WANT_DEFAULT=curses
 #     library installation root.  (Qt2 or Qt3 will not work.)
 ifdef WANT_WIN_QT
 QTDIR=/usr
-#HAVE_QT5=1
+HAVE_QT5=1
 ifdef HAVE_QT5
     QT_PACKAGES = Qt5Gui Qt5Widgets
     QT_CORE = Qt5Core
